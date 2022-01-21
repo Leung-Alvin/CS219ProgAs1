@@ -90,6 +90,7 @@ string convertInt(uint64_t i){
 }	
 
 HexNum::HexNum(string nhexVal){
+	hexName = nhexVal;
 	size_t loc = nhexVal.find("0x");
 	hexVal = nhexVal.substr(loc+2);
 	len = hexVal.length();
@@ -99,12 +100,17 @@ HexNum::HexNum(string nhexVal){
 
 HexNum::HexNum(uint64_t i){
 	intVal = i;
-	hexVal = "0x" + convertInt(i);
+	hexVal = convertInt(i);
+	hexName = "0x" + hexVal;
 	len = hexVal.length();
 }
 
 string HexNum::getHex() const{
 	return hexVal;
+}
+
+string HexNum::getHexName() const{
+	return hexName;
 }
 
 uint64_t HexNum::getInt() const{

@@ -17,12 +17,14 @@ private:
 	string hexVal;
 	uint64_t intVal;
 	int len;
+	string hexName;
 
 public: 
 	string getHex() const;
 	uint64_t getInt() const;
 	void setHex(string h);
 	void setInt(uint64_t i); 
+	string getHexName() const;
 
 };
 

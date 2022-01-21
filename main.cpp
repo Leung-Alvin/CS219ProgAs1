@@ -27,7 +27,7 @@ int main(){
 			uint64_t sum = h1.getInt() + h2.getInt();
 			HexNum s = HexNum(sum);
 			cout<< "----" << endl;
-			cout << s.getHex() << endl;
+			cout << h1.getHexName() << " + " << h2.getHexName() << " = " << s.getHexName() << endl;
 			
 		}
 
