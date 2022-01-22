@@ -20,4 +20,3 @@
 ## Meta
 
 Alvin Leung - aleung@nevada.unr.edu
-s
