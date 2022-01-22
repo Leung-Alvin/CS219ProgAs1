@@ -1,6 +1,18 @@
+/**
+    CS219 This is the implemenation of the HexNum class, which represents hexadecimal numbers. The class creates hexadecimal number objects
+	that can read out its decimal equivalent, hexadecimal value, hexadecimal name, and hexadecimal number length. There are functions that 
+	convert hexadecimal values to decimal numbers.
+    @file hexnum.cpp
+    @author Alvin Leung
+    @version 1.0 1/21/2022
+*/
 #include "hexnum.h"
 #include <math.h>
-
+/**
+    Converts an integer value into a hexadecimal digit
+    @param ret the integer to be converted
+    @return a string representing a hexadecimal digit
+*/
 string convertIntDig(int ret){
 	if(ret == 10) return "A";
 	if(ret == 11) return "B";
@@ -10,6 +22,12 @@ string convertIntDig(int ret){
 	if(ret == 15) return "F";
 	return std::to_string(ret);
 }
+
+/**
+    Converts a hexadecimal digit into a decimal value
+    @param s A character representing a hexadecimal digit.
+    @return a 64 bit unsigned integer representing the converted hexadecimal digit.
+*/
 
 uint64_t convertHexDig(char s){
 	if(s == '0'){
@@ -62,7 +80,13 @@ uint64_t convertHexDig(char s){
 	}
 
 }
-
+/**
+    Converts an entire hexadecimal number into an integer number. This utilizes the implementation of convertHexDig(char s)
+	as a helper function
+    @param s the hexadecimal number to be converted into an integer
+	@param len the integer representing the length of the hexadecimal number, the number of hexadecimal digits in string s
+    @return a 64 bit unsigned integer representing the decimal number converted from the parameter hexadecimal number
+*/
 uint64_t convertHex(string s, int len){
 	int power = len-1;
 	uint64_t sum = 0;
@@ -73,6 +97,13 @@ uint64_t convertHex(string s, int len){
 	}
 	return sum;
 }
+
+/**
+    Converts a decimal number into a hexadecimal number. This method uses the implementation of convertIntDig(int ret)
+	as a helper function.
+    @param i the decimal number to be converted into hexadecimal
+    @return a string representing the hexadecimal number converted from the parameter decimal number.
+*/
 
 string convertInt(uint64_t i){
 	string ret = "";
@@ -88,7 +119,7 @@ string convertInt(uint64_t i){
 	}
 	return ret2;
 }	
-
+//Constructor for a Hex Number if given a hexadecimal number in string form (ex: "0x132").
 HexNum::HexNum(string nhexVal){
 	hexName = nhexVal;
 	size_t loc = nhexVal.find("0x");
@@ -97,29 +128,49 @@ HexNum::HexNum(string nhexVal){
 	intVal = convertHex(hexVal,len);
 
 }
-
+//Constructor for a Hex Number if given a decimal number in integer form (ex: 1322).
 HexNum::HexNum(uint64_t i){
 	intVal = i;
 	hexVal = convertInt(i);
 	hexName = "0x" + hexVal;
 	len = hexVal.length();
 }
-
+/**
+    Returns the hexadecimal value of this Hex Number
+    @return a string representing the hexadecimal value of this Hex Number
+*/
 string HexNum::getHex() const{
 	return hexVal;
 }
-
+/**
+    Returns the hexadecimal number of this Hex Number
+    @return a string representing the hexadecimal nnumber of this Hex Number. Hexadecimal number and hexadecimal value are different
+	in that the hexadecimal number has a 0x as a header. (1231 vs 0x1231)
+*/
 string HexNum::getHexName() const{
 	return hexName;
 }
-
+/**
+    Returns the decimal number of this Hex Number
+    @return an intger representing the decimal number of this Hex Number.
+*/
 uint64_t HexNum::getInt() const{
 	return intVal;
 }
 
+/**
+    Assigns a new hexadecimal value for this Hex Number (Work in Progress and not needed for this assignment)
+    @param h a string representing the new hexadecimal value for this Hex Number
+*/
+
 void HexNum::setHex(string h){
 	hexVal = h;
 }
+
+/**
+    Assigns a new decimal number for this Hex Number (Work in Progress and not needed for this assignment)
+    @param i a 64 bit unsigned integer representing the new decimal number to be assigned.
+*/
 
 void HexNum::setInt(uint64_t i){
 	intVal = i;
