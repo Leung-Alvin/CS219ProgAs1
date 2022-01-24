@@ -75,9 +75,7 @@ uint64_t convertHexDig(char s){
 	if(s == 'E'){
 	 return 14;
 	}
-	if(s == 'F'){
 	 return 15;
-	}
 
 }
 /**
