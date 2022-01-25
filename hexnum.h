@@ -19,19 +19,19 @@ class HexNum{
 public:
 	HexNum() = default;
 	HexNum(string nhexVal);
-	HexNum(uint64_t i);
+	HexNum(uint32_t i);
 
 private:
 	string hexVal;
-	uint64_t intVal;
+	uint32_t intVal;
 	int len;
 	string hexName;
 
 public: 
 	string getHex() const;
-	uint64_t getInt() const;
+	uint32_t getInt() const;
 	void setHex(string h);
-	void setInt(uint64_t i); 
+	void setInt(uint32_t i); 
 	string getHexName() const;
 
 };
