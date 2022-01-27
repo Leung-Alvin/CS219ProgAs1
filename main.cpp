@@ -43,14 +43,13 @@ int main(){
 			file >> word;
 			HexNum h2 = HexNum(word);
 			//The sum of the two Hex Numbers are found by adding the integer values of the respective Hex Numbers
-			uint64_t sum = h1.getInt() + h2.getInt();
+			HexNum sum = h1 + h2;
 			//A HexNumber representing the sum is created
-			HexNum s = HexNum(sum);
 			//A separator is printed out to separate answers
 			cout<< "----" << endl;
 			//The two Hexadecimal numbers are printed out in the equation print with the Hexadecimal Number representing
 			//the sum is printed last
-			cout << h1.getHexName() << " + " << h2.getHexName() << " = " << s.getHexName() << endl;
+			cout << h1.getHexName() << " + " << h2.getHexName() << " = " << sum.getHexName() << endl;
 			
 		}
 

@@ -20,6 +20,7 @@ public:
 	HexNum() = default;
 	HexNum(string nhexVal);
 	HexNum(uint32_t i);
+	HexNum(uint32_t i, int length);
 
 private:
 	string hexVal;
@@ -33,6 +34,7 @@ public:
 	void setHex(string h);
 	void setInt(uint32_t i); 
 	string getHexName() const;
+	HexNum operator+ (const HexNum& rhs) const;
 
 };
 

@@ -90,10 +90,10 @@ uint32_t convertHex(string s, int len){
 	uint32_t sum = 0;
 	for(int i = 0; i < len; i++){
 		int digit = convertHexDig(s.at(i));
-		if(sum+pow(16,power) * digit > 4294967295){
+		/*if(sum+pow(16,power) * digit > 4294967295){
 			uint64_t overflow = sum+pow(16,power) * digit;
 			sum = overflow - 4294967295;
-		}
+		}*/
 		sum += pow(16,power) * digit;
 		power--;
 	}
@@ -105,15 +105,15 @@ uint32_t convertHex(string s, int len){
 /**
     Converts a decimal number into a hexadecimal number. This method uses the implementation of convertIntDig(int ret)
 	as a helper function.
-    @param i the decimal number to be converted into hexadecimal
+    @param i the decimal number to be converted into hexadecimal, len is the length of the hexadecimal number to be created
     @return a string representing the hexadecimal number converted from the parameter decimal number.
 */
 
-string convertInt(uint32_t i){
-	if(i == 0){
-		return "0";
-	}
+string convertInt(uint32_t i, int len){
 	string ret = "";
+	if(i == 0){
+		ret+="0";
+	}
 	uint32_t copy = i;
 	while (copy > 0){
 		int remainder = copy%16;
@@ -124,6 +124,9 @@ string convertInt(uint32_t i){
 	for (int i = ret.length()-1; i >= 0; i--){
 		ret2+=ret.at(i);
 	}
+	while(len > ret2.length()){
+		ret2 = "0" + ret2;
+	} 
 	return ret2;
 }	
 //Constructor for a Hex Number if given a hexadecimal number in string form (ex: "0x132").
@@ -135,10 +138,18 @@ HexNum::HexNum(string nhexVal){
 	intVal = convertHex(hexVal,len);
 
 }
+
+HexNum::HexNum(uint32_t i, int length){
+	intVal = i;
+	hexVal = convertInt(i,length);
+	hexName = "0x" + hexVal;
+	len = hexVal.length();
+}
+
 //Constructor for a Hex Number if given a decimal number in integer form (ex: 1322).
 HexNum::HexNum(uint32_t i){
 	intVal = i;
-	hexVal = convertInt(i);
+	hexVal = convertInt(i, len);
 	hexName = "0x" + hexVal;
 	len = hexVal.length();
 }
@@ -181,6 +192,14 @@ void HexNum::setHex(string h){
 
 void HexNum::setInt(uint32_t i){
 	intVal = i;
+}
+
+HexNum HexNum::operator+ (const HexNum& rhs) const{
+	int outputLength = len;
+	if(len < rhs.len){
+		outputLength = rhs.len;
+	}
+	return HexNum(intVal + rhs.intVal, outputLength);
 }
 
 
