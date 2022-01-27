@@ -90,17 +90,12 @@ uint32_t convertHex(string s, int len){
 	uint32_t sum = 0;
 	for(int i = 0; i < len; i++){
 		int digit = convertHexDig(s.at(i));
-		/*if(sum+pow(16,power) * digit > 4294967295){
-			uint64_t overflow = sum+pow(16,power) * digit;
-			sum = overflow - 4294967295;
-		}*/
 		sum += pow(16,power) * digit;
 		power--;
 	}
 	return sum;
 }
 
-//overflow = 
 
 /**
     Converts a decimal number into a hexadecimal number. This method uses the implementation of convertIntDig(int ret)
@@ -129,7 +124,7 @@ string convertInt(uint32_t i, int len){
 	} 
 	return ret2;
 }	
-//Constructor for a Hex Number if given a hexadecimal number in string form (ex: "0x132").
+
 HexNum::HexNum(string nhexVal){
 	hexName = nhexVal;
 	size_t loc = nhexVal.find("0x");
@@ -146,49 +141,30 @@ HexNum::HexNum(uint32_t i, int length){
 	len = hexVal.length();
 }
 
-//Constructor for a Hex Number if given a decimal number in integer form (ex: 1322).
+
 HexNum::HexNum(uint32_t i){
 	intVal = i;
 	hexVal = convertInt(i, len);
 	hexName = "0x" + hexVal;
 	len = hexVal.length();
 }
-/**
-    Returns the hexadecimal value of this Hex Number
-    @return a string representing the hexadecimal value of this Hex Number
-*/
+
 string HexNum::getHex() const{
 	return hexVal;
 }
-/**
-    Returns the hexadecimal number of this Hex Number
-    @return a string representing the hexadecimal nnumber of this Hex Number. Hexadecimal number and hexadecimal value are different
-	in that the hexadecimal number has a 0x as a header. (1231 vs 0x1231)
-*/
+
 string HexNum::getHexName() const{
 	return hexName;
 }
-/**
-    Returns the decimal number of this Hex Number
-    @return an intger representing the decimal number of this Hex Number.
-*/
+
 uint32_t HexNum::getInt() const{
 	return intVal;
 }
-
-/**
-    Assigns a new hexadecimal value for this Hex Number (Work in Progress and not needed for this assignment)
-    @param h a string representing the new hexadecimal value for this Hex Number
-*/
 
 void HexNum::setHex(string h){
 	hexVal = h;
 }
 
-/**
-    Assigns a new decimal number for this Hex Number (Work in Progress and not needed for this assignment)
-    @param i a 32 bit unsigned integer representing the new decimal number to be assigned.
-*/
 
 void HexNum::setInt(uint32_t i){
 	intVal = i;
